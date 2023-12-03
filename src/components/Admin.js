@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react'
+// eslint-disable-next-line
 import admin from './../styles/admin.css'
 
 function Admin() {
@@ -6,6 +7,7 @@ function Admin() {
     const [currentPage, setcurrentPage] = useState(1) // for implementing pagination
     const itemsPerPage = 10;
     const [selectedRows, setSelectedRows] = useState([]); //for recording selected rows
+    // eslint-disable-next-line
     const [rowBackgroundColors, setRowBackgroundColors] = useState({}); // for changing background color on click of row
     const [userDataObj, setuserDataObj] = useState({
         userName: "",
@@ -13,25 +15,26 @@ function Admin() {
         userRole: ""
     }) //for editing data of individual user
     const [editingRows, setEditingRows] = useState({}); // Track editing status for each row
-    const [searchTerm, setSearchTerm] = useState(''); 
+    const [searchTerm, setSearchTerm] = useState('');
 
     async function getData() {
         let result = await fetch(
-          'https://geektrust.s3-ap-southeast-1.amazonaws.com/adminui-problem/members.json'
+            'https://geektrust.s3-ap-southeast-1.amazonaws.com/adminui-problem/members.json'
         );
         let response = await result.json();
-    
+
         // Filter data based on the search term
         const filteredData = response.filter(user =>
-          user.name.toLowerCase().includes(searchTerm.toLowerCase())
+            user.name.toLowerCase().includes(searchTerm.toLowerCase())
         );
-    
+
         setuserData(filteredData);
-      }
+    }
 
     useEffect(() => {
         getData();
-      }, [searchTerm]);
+        // eslint-disable-next-line
+    }, [searchTerm]);
 
     const indexOfLastItem = currentPage * itemsPerPage;
     const indexOfFirstItem = indexOfLastItem - itemsPerPage;
@@ -120,6 +123,7 @@ function Admin() {
 
         let userDataCopy = [...userData];
         let userDataObjCopy = { ...userDataObj }
+        // eslint-disable-next-line
         userDataCopy.map(item => {
             if (item.id === userId) {
                 item.name = userDataObjCopy.userName;
